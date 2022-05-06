@@ -3,8 +3,10 @@
 # Import required libraries
 import fire
 import questionary
-from pathlib import Path
+import time
+import alpaca_trade_api as tradeapi
 import os
+from dotenv import load_dotenv
 
 from utils.helper import get_alpacas_info
 
@@ -91,9 +93,31 @@ def input_ticker_info():
     print(ticker, buy_signal, sell_signal, trade_allocation)
     return ticker, buy_signal, sell_signal, trade_allocation
 
+def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
+    # Load env file and connect to Alpacas API
+    load_dotenv('api.env')
+    alpaca_api_key = os.getenv('ALPACA_API_KEY')
+    alpaca_secret_key = os.getenv('ALPACA_SECRET_KEY')
+
+    # Create alpacas API object
+    api = tradeapi.REST(alpaca_api_key, alpaca_secret_key, "https://paper-api.alpaca.markets", "v2")
+    
+    # Set ticker variables
+
+    # Initialize trading bot
+    while True:
+        try:
+            api.get_position(ticker)
+            time.sleep(11)
+        except:
+            api.submit_order(symbol=ticker,qty=1,side='buy',type='market',time_in_force='gtc')
+            time.sleep(10)
+            api.submit_order(symbol=ticker,qty=1,side='sell', type='trailing_stop', trail_percent=sell_signal, time_in_force='gtc')
+
 # Main function for running the script
 def run():
-    input_ticker_info()
+    ticker, buy_signal, sell_signal, trade_allocation = input_ticker_info()
+    run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation)
 
 if __name__ == "__main__":
     fire.Fire(run)
