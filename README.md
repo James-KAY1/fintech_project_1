@@ -12,30 +12,34 @@ This bot includes the following features:
 ## Technologies
 
 Our AutoTrader Bot utilizes Python 3 and the following libaries:
-1. fire
-2. questionary
-3. time
-4. pathlib
-5. pandas
-6. numpy
-7. alpaca_trade_api
-8. dotenv
-9. requests
-10. hvplot
-11. sqlalchemy
-12. os
-13. ast
-14. json
-15. requests_html
-16. ftplib
-17. yahoo.fin
-18. IPython
-19. io
-20. matploblib
-21. mpl_toolkits
-22. talib
-23. websocket
-24. plotly
+1.	fire
+2.	questionary
+3.	time
+4.	Path from pathlib
+5.	pandas
+6.	numpy
+7.	numpy.random
+8.	alpaca_trade_api
+9.	REST, TimeFrame from alpaca_trade_api
+10.	load_dotenv from dotenv
+11.	requests
+12.	hvplot.pandas
+13.	sqlalchemy
+14.	os
+15.	ast
+16.	json
+17.	requests_html
+18.	ftplib
+19.	yahoo.fin.stock_info
+20.	get_data from yahoo_fin.stock_info
+21.	IPython.display
+22.	io
+23.	matploblib.pyplot
+24.	mplot3d from mpl_toolkits
+25.	talib
+26.	websocket
+27.	plotly.graph_objects
+28.	plotly.express
 
 ---
 
@@ -73,7 +77,7 @@ As part of the FinTech Bootcamp Project 1, Team 1 consisted of the following mem
 2. Tao (Trading Bot, Signals for Trading Bot, Technical Analysis for Signals)
 3. James Handral (Historical Analysis for Health and Finance Sectors)
 4. Colton Mayes (Data Visualization, Final Presentation)
-5. Anton Maliksi (Historical Analysis for Energy, Tech, and Utilities Sectors, README file, Final Presentation)
+5. Anton Maliksi (README file, Final Presentation)
 
 ---
 
