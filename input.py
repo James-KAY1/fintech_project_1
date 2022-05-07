@@ -4,8 +4,6 @@
 import fire
 import questionary
 import time
-import alpaca_trade_api as tradeapi
-import os
 from dotenv import load_dotenv
 from pathlib import Path
 import pandas as pd
