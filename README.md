@@ -74,8 +74,8 @@ Versioning History and Repository control was maintained by each member of Team 
 As part of the FinTech Bootcamp Project 1, Team 1 consisted of the following members:
 
 1. Ryan Anderson (Questionary Inputs, Modularity)
-2. Tao (Trading Bot, Signals for Trading Bot, Technical Analysis for Signals)
-3. James Handral (Historical Analysis for Health and Finance Sectors)
+2. Tao Chen (Trading Bot, Signals for Trading Bot, Technical Analysis for Signals)
+3. James Handral (Historical Analysis for Health, Finance, Tech, Energy, and Utilities Sectors)
 4. Colton Mayes (Data Visualization, Final Presentation)
 5. Anton Maliksi (README file, Final Presentation)
 
