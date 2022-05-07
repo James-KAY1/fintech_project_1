@@ -101,8 +101,6 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
 
     # Create alpacas API object
     api = tradeapi.REST(alpaca_api_key, alpaca_secret_key, "https://paper-api.alpaca.markets", "v2")
-    
-    # Set ticker variables
 
     # Initialize trading bot
     while True:
