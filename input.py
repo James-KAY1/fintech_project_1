@@ -7,16 +7,30 @@ import time
 import alpaca_trade_api as tradeapi
 import os
 from dotenv import load_dotenv
+from pathlib import Path
+import pandas as pd
 
 from utils.helper import get_alpacas_info
 
 # Function to input tickers to track as well as the buy and sell prices
 def input_ticker_info():
+    # Import csv
+    sectors_and_tickers = pd.read_csv(
+        Path("./Resources/sectors_and_tickers.csv")
+    )
 
-    # Input ticker
-    ticker = questionary.text("Please input your stock ticker").ask()
+    # Set the sectors available for selection based on columns in CSV
+    sector_list = sectors_and_tickers.columns
 
-    # IF WE START TO ITERATE THROUGH STOCKS, (I.E ADDING MORE THAN 1) WE WILL NEED THE ABILITY TO DEDUCT THE TRADE ALLOCATIONS FROM THE TRADE BALANCE
+    # Select the sector for the stock you would like to trade
+    sector = questionary.select("From which sector would you like to select your stock?",choices=sector_list).ask()
+
+    # Assign the list of avaible tickers based on the sector selected
+    ticker_list = sectors_and_tickers[f"{sector}"]
+
+    # Select the ticker you would like to trade
+    ticker = questionary.select("Please select the ticker you would like to trade.",choices=ticker_list).ask()
+
     # Get current buying power
     buying_power = get_alpacas_info().buying_power
     buying_power = float(buying_power)
