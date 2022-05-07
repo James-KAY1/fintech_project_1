@@ -41,12 +41,16 @@ def input_ticker_info():
     allocation = questionary.text(f"What percentage of your cash on hand would you like to allocate to trading {ticker} ?").ask()
     allocation = float(allocation)
 
-    # Check that the percentage is positive
+    # Check that the percentage is positive and not above 100%
     if allocation < 0:
         allocation = questionary.text("Please enter a non-negative number").ask()
+    elif allocation > 100:
+        allocation = questionary.text("Please enter a number less than 100").ask()
 
+    allocation = float(allocation)
+    
     # Ensure inputs are formatted to be consumed by auto-trader
-    elif allocation > 0 and allocation < 1: 
+    if allocation > 0 and allocation < 1: 
         allocation = allocation
     else:
         allocation = allocation/100
