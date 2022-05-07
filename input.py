@@ -32,7 +32,7 @@ def input_ticker_info():
     ticker = questionary.select("Please select the ticker you would like to trade.",choices=ticker_list).ask()
 
     # Get current buying power
-    buying_power = get_alpacas_info().buying_power
+    buying_power = get_alpacas_info()[0].buying_power
     buying_power = float(buying_power)
 
     print(f"You have {buying_power} to trade.")
@@ -112,23 +112,16 @@ def input_ticker_info():
     return ticker, buy_signal, sell_signal, trade_allocation
 
 def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
-    # Load env file and connect to Alpacas API
-    load_dotenv('api.env')
-    alpaca_api_key = os.getenv('ALPACA_API_KEY')
-    alpaca_secret_key = os.getenv('ALPACA_SECRET_KEY')
 
-    # Create alpacas API object
-    api = tradeapi.REST(alpaca_api_key, alpaca_secret_key, "https://paper-api.alpaca.markets", "v2")
-
-    # Initialize trading bot
+# Initialize trading bot
     while True:
         try:
-            api.get_position(ticker)
+            get_alpacas_info()[1].get_position(ticker)
             time.sleep(11)
         except:
-            api.submit_order(symbol=ticker,qty=1,side='buy',type='market',time_in_force='gtc')
+            get_alpacas_info()[1].submit_order(symbol=ticker,qty=1,side='buy',type='market',time_in_force='gtc')
             time.sleep(10)
-            api.submit_order(symbol=ticker,qty=1,side='sell', type='trailing_stop', trail_percent=sell_signal, time_in_force='gtc')
+            get_alpacas_info()[1].submit_order(symbol=ticker,qty=1,side='sell', type='trailing_stop', trail_percent=sell_signal, time_in_force='gtc')
 
 # Main function for running the script
 def run():
