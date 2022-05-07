@@ -4,7 +4,6 @@
 import fire
 import questionary
 import time
-from dotenv import load_dotenv
 from pathlib import Path
 import pandas as pd
 
