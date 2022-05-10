@@ -1,9 +1,6 @@
 """ Input Application for Auto-Trader """
 
 # Import required libraries
-# TEST ignore api.evv
-# Test2 
-#test 3
 import fire
 import questionary
 import time
@@ -12,22 +9,12 @@ from pathlib import Path
 import pandas as pd
 import ast
 import json
-#import requests
-#import talib as ta
 import websocket
 from alpaca_trade_api import REST, TimeFrame
-#import alpaca_trade_api as tradeapi
-#from dotenv import load_dotenv
-#import os
 from utils.helper import get_alpacas_info
 
 alpaca_api_key = get_alpacas_info()[2]
 alpaca_secret_key = get_alpacas_info()[3]
-
-#load_dotenv('api.env')
-#alpaca_api_key = os.getenv('ALPACA_API_KEY')
-#alpaca_secret_key = os.getenv('ALPACA_SECRET_KEY')
-#type(alpaca_secret_key)
 
 # Function to input tickers to track as well as the buy and sell prices
 def input_ticker_info():
@@ -134,9 +121,6 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     print(f'earlier_date_to_compare is {earlier_date_to_compare}')
 
     # Extract price of earlier date from Alpaca API
-    #rest_client = REST(alpaca_api_key, alpaca_secret_key)
-    #bars_from_earlier_date = rest_client.get_bars(ticker, TimeFrame.Day, earlier_date_to_compare, earlier_date_to_compare).df
-
     bars_from_earlier_date = get_alpacas_info()[1].get_bars(ticker, TimeFrame.Day, earlier_date_to_compare, earlier_date_to_compare).df
     print(f'bars_from_earlier_date {bars_from_earlier_date}')
     price_from_earlier_date = bars_from_earlier_date.iloc[0]['close']
