@@ -78,12 +78,8 @@ def input_ticker_info():
         buy_signal = questionary.text("What percentage would you like to use as your buy signal").ask()
         buy_signal = float(buy_signal)
 
-        # Check that the percentage is positive
-        if buy_signal < 0:
-            buy_signal = questionary.text("Please enter a non-negative number").ask()
-
         # Handle zero value entries    
-        elif buy_signal == 0:
+        if buy_signal == 0:
             buy_opt_out = questionary.confirm("Are you sure you do not want to buy any of these shares today?").ask()
             if buy_opt_out:
                 break
@@ -179,16 +175,11 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
                     time.sleep(10)
                     get_alpacas_info()[1].submit_order(symbol=ticker,qty=shares_to_trade,side='sell', type='trailing_stop', trail_percent=sell_signal, time_in_force='gtc')
 
-    #    else:
-    #        continue
-    
     def on_close(ws):
         print("closed connection")
 
     ws = websocket.WebSocketApp(socket, on_open=on_open, on_message=on_message, on_close=on_close)
     ws.run_forever()
-
-
 
 # Main function for running the script
 def run():
