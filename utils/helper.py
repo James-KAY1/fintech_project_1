@@ -23,4 +23,4 @@ def get_alpacas_info():
     # Assign account information to variable
     account = api.get_account()
 
-    return account, api
+    return account, api, alpaca_api_key,alpaca_secret_key
