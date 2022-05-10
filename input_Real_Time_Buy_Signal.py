@@ -1,6 +1,9 @@
 """ Input Application for Auto-Trader """
 
 # Import required libraries
+# TEST ignore api.evv
+# Test2 
+#test 3
 import fire
 import questionary
 import time
@@ -124,7 +127,7 @@ def input_ticker_info():
 def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     # Initialize trading bot
     # extract 10 days prior price 
-    days_to_subtract = 10
+    days_to_subtract = 11
     today = (datetime.today()).strftime('%Y-%m-%d')
     print(f'today is {today}')
     earlier_date_to_compare = (datetime.today()-timedelta(days=days_to_subtract)).strftime('%Y-%m-%d')

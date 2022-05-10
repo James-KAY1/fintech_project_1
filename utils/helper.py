@@ -7,7 +7,7 @@ import os
 
 # Function to get Alpacas trading account info
 def get_alpacas_info():
-    load_dotenv('api.env')
+    load_dotenv()
     alpaca_api_key = os.getenv('ALPACA_API_KEY')
     alpaca_secret_key = os.getenv('ALPACA_SECRET_KEY')
     base_url = 'https://paper-api.alpaca.markets'
