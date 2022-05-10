@@ -9,19 +9,22 @@ from pathlib import Path
 import pandas as pd
 import ast
 import json
-import requests
-import talib as ta
+#import requests
+#import talib as ta
 import websocket
 from alpaca_trade_api import REST, TimeFrame
-import alpaca_trade_api as tradeapi
-from dotenv import load_dotenv
-import os
+#import alpaca_trade_api as tradeapi
+#from dotenv import load_dotenv
+#import os
 from utils.helper import get_alpacas_info
 
-load_dotenv('api.env')
-alpaca_api_key = os.getenv('ALPACA_API_KEY')
-alpaca_secret_key = os.getenv('ALPACA_SECRET_KEY')
-type(alpaca_secret_key)
+alpaca_api_key = get_alpacas_info()[2]
+alpaca_secret_key = get_alpacas_info()[3]
+
+#load_dotenv('api.env')
+#alpaca_api_key = os.getenv('ALPACA_API_KEY')
+#alpaca_secret_key = os.getenv('ALPACA_SECRET_KEY')
+#type(alpaca_secret_key)
 
 # Function to input tickers to track as well as the buy and sell prices
 def input_ticker_info():
@@ -124,21 +127,24 @@ def input_ticker_info():
 
 def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     # Initialize trading bot
-    # extract 3 days prior price 
-    days_to_subtract = 3
+    # extract 10 days prior price 
+    days_to_subtract = 10
     today = (datetime.today()).strftime('%Y-%m-%d')
     print(f'today is {today}')
     earlier_date_to_compare = (datetime.today()-timedelta(days=days_to_subtract)).strftime('%Y-%m-%d')
     print(f'earlier_date_to_compare is {earlier_date_to_compare}')
+
     # Extract price of earlier date from Alpaca API
-    rest_client = REST(alpaca_api_key, alpaca_secret_key)
-    bars_from_earlier_date = rest_client.get_bars(ticker, TimeFrame.Day, earlier_date_to_compare, earlier_date_to_compare).df
+    #rest_client = REST(alpaca_api_key, alpaca_secret_key)
+    #bars_from_earlier_date = rest_client.get_bars(ticker, TimeFrame.Day, earlier_date_to_compare, earlier_date_to_compare).df
+
+    bars_from_earlier_date = get_alpacas_info()[1].get_bars(ticker, TimeFrame.Day, earlier_date_to_compare, earlier_date_to_compare).df
     print(f'bars_from_earlier_date {bars_from_earlier_date}')
     price_from_earlier_date = bars_from_earlier_date.iloc[0]['close']
     print(f'The price_from_earlier_date is {price_from_earlier_date}')
     
     # Calculating trading signal
-    price_to_start_trading_bot = price_from_earlier_date * (1+buy_signal/100)
+    price_to_start_trading_bot = price_from_earlier_date * (1+buy_signal)
     print(f'price_to_start_trading_bot is {price_to_start_trading_bot}')
     
     # link for alcapa socket 
@@ -159,7 +165,8 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
         formatted_message = ast.literal_eval(message)
         last_time = formatted_message[0].get("t")
         last_close = formatted_message[0].get("c")
-        print(f'infor from preivous minitue: time is {last_time}; close is {last_close};')
+        print(f'infor from previous minute: time is {last_time}; close is {last_close};')
+        shares_to_trade = trade_allocation//last_close
     # Once the realtime price exceeds the signal price, start the trading bot
         if last_close>price_to_start_trading_bot:
             print(f'Buy signal price {price_to_start_trading_bot} has just been reached, starting the Trading Bot...')
@@ -168,12 +175,12 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
                     get_alpacas_info()[1].get_position(ticker)
                     time.sleep(11)
                 except:
-                    get_alpacas_info()[1].submit_order(symbol=ticker,qty=1,side='buy',type='market',time_in_force='gtc')
+                    get_alpacas_info()[1].submit_order(symbol=ticker,qty=shares_to_trade,side='buy',type='market',time_in_force='gtc')
                     time.sleep(10)
-                    get_alpacas_info()[1].submit_order(symbol=ticker,qty=1,side='sell', type='trailing_stop', trail_percent=sell_signal, time_in_force='gtc')
+                    get_alpacas_info()[1].submit_order(symbol=ticker,qty=shares_to_trade,side='sell', type='trailing_stop', trail_percent=sell_signal, time_in_force='gtc')
 
-    #   else:
-    #       continue
+    #    else:
+    #        continue
     
     def on_close(ws):
         print("closed connection")
