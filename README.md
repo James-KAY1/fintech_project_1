@@ -5,8 +5,8 @@ We are proud to showcase the development of an AutoTrader program that provides 
 
 This Application includes the following features:
 1. Analysis and selection of the top performing tickers within the Technology, Energy, Health, Utility, and Finance sectors.
-1. Terminal interface with the application that users can utilize to select recommended tickers to trade.
-2. The terminal interface will also offer the users the capablilities to select criterias for the buy/sell signals for the trading bot to use for placing trades on their behalf.
+2. Command line interface with the application that users can utilize to select recommended tickers to trade.
+3. The terminal interface will also offer the users the capablilities to select criterias for the buy/sell signals for the trading bot to use for placing trades on their behalf.
 
 >![trading_bot](./Images/trading_bot.jpg)
 
@@ -43,7 +43,7 @@ Please use the following links to access the different sections of the Repositor
 
    >[Finance](./Industry_sector_tickers_analysis/finance_stocks_analysis_selection.ipynb)
 
-1. **Terminal Interface (user) with Application**: Terminal functionality (Utilizing Fire and Questionary python library & other libraries listed per the link)
+1. **Command Line Interface (user) with Application**: Terminal functionality (Utilizing Fire and Questionary python library & other libraries listed per the link)
 
 
 3. **Trading Bot**: Trading application that will place trade on behalf of user (Utilizing Alpaca API & other libraries listed per the link).
