@@ -203,6 +203,7 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     def on_close(ws):
         print("closed connection")
 
+    # Create the websocket variable to stream realtime data
     ws = websocket.WebSocketApp(
         socket,
         on_open=on_open,
