@@ -126,8 +126,14 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     print(f'earlier_date_to_compare is {earlier_date_to_compare}')
 
     # Extract price of earlier date from Alpaca API
-    bars_from_earlier_date = get_alpacas_info()[1].get_bars(ticker, TimeFrame.Day, earlier_date_to_compare, earlier_date_to_compare).df
+    bars_from_earlier_date = get_alpacas_info()[1].get_bars(
+        ticker,
+        TimeFrame.Day,
+        earlier_date_to_compare,
+        earlier_date_to_compare
+    ).df
     print(f'bars_from_earlier_date {bars_from_earlier_date}')
+
     price_from_earlier_date = bars_from_earlier_date.iloc[0]['close']
     print(f'The price_from_earlier_date is {price_from_earlier_date}')
     
@@ -168,7 +174,7 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
                 try:
                     # Get the number of shares that are currently owned
                     get_alpacas_info()[1].get_position(ticker)
-                    
+
                     # Hold for 11 seconds
                     time.sleep(11)
                 except:
@@ -197,7 +203,12 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     def on_close(ws):
         print("closed connection")
 
-    ws = websocket.WebSocketApp(socket, on_open=on_open, on_message=on_message, on_close=on_close)
+    ws = websocket.WebSocketApp(
+        socket,
+        on_open=on_open,
+        on_message=on_message,
+        on_close=on_close
+    )
     ws.run_forever()
 
 # Main function for running the script
