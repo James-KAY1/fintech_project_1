@@ -10,7 +10,8 @@ import pandas as pd
 import ast
 import json
 import websocket
-from alpaca_trade_api import REST, TimeFrame
+from alpaca_trade_api import TimeFrame
+
 from utils.helper import get_alpacas_info
 
 alpaca_api_key = get_alpacas_info()[2]
@@ -111,12 +112,16 @@ def input_ticker_info():
     print(ticker, buy_signal, sell_signal, trade_allocation)
     return ticker, buy_signal, sell_signal, trade_allocation
 
+# Function to initialize the trading bot
 def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
-    # Initialize trading bot
-    # extract 10 days prior price 
+    # Set date offset to 11 days prior 
     days_to_subtract = 11
+
+    # Set today as a variable
     today = (datetime.today()).strftime('%Y-%m-%d')
     print(f'today is {today}')
+
+    # Determine the date of 11 days prior
     earlier_date_to_compare = (datetime.today()-timedelta(days=days_to_subtract)).strftime('%Y-%m-%d')
     print(f'earlier_date_to_compare is {earlier_date_to_compare}')
 
@@ -133,34 +138,61 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     # link for alcapa socket 
     socket = "wss://stream.data.alpaca.markets/v2/iex"
 
-    # Define functions for websocket
+    # Define function for websocket
     def on_open(ws):
         print("opened")
+        # Authenticate into Alpacas
         auth_data = {"action":"auth","key":alpaca_api_key,"secret":alpaca_secret_key}
         ws.send(json.dumps(auth_data))
         listen_message = {"action":"subscribe","bars":[ticker]}
         ws.send(json.dumps(listen_message))
 
-
+    # Define function to display the previous close time and close price minute by minute
     def on_message(ws, message):
         print("received a message")
         print(message)
         formatted_message = ast.literal_eval(message)
+
+        # Define the time and the close price from when the last message was received
         last_time = formatted_message[0].get("t")
         last_close = formatted_message[0].get("c")
         print(f'infor from previous minute: time is {last_time}; close is {last_close};')
+
+        # Set the number of shares (rounded) that could be bought, given the input amount to trade and last close price
         shares_to_trade = trade_allocation//last_close
+
     # Once the realtime price exceeds the signal price, start the trading bot
         if last_close>price_to_start_trading_bot:
             print(f'Buy signal price {price_to_start_trading_bot} has just been reached, starting the Trading Bot...')
             while True:
                 try:
+                    # Get the number of shares that are currently owned
                     get_alpacas_info()[1].get_position(ticker)
+                    
+                    # Hold for 11 seconds
                     time.sleep(11)
                 except:
-                    get_alpacas_info()[1].submit_order(symbol=ticker,qty=shares_to_trade,side='buy',type='market',time_in_force='gtc')
+                    # Create a buy order
+                    get_alpacas_info()[1].submit_order(
+                        symbol=ticker,          # Set the ticker
+                        qty=shares_to_trade,    # Set number of shares to trade
+                        side='buy',             # Set order type to buy
+                        type='market',          # Set order type to market order
+                        time_in_force='gtc'     # Set time in force to 'good to close'
+                    )
+
+                    # Pause between buy and trailing stop
                     time.sleep(10)
-                    get_alpacas_info()[1].submit_order(symbol=ticker,qty=shares_to_trade,side='sell', type='trailing_stop', trail_percent=sell_signal, time_in_force='gtc')
+
+                    # Create a trailing stop order
+                    get_alpacas_info()[1].submit_order(
+                        symbol=ticker,                # Set the ticker
+                        qty=shares_to_trade,          # Set the quantity of shares to sell (same as shares to buy)
+                        side='sell',                  # Set order type to sell
+                        type='trailing_stop',         # Set order type to 'trailing stop'
+                        trail_percent=sell_signal,    # Set the trailing stop percentage to 'sell signal' input by user
+                        time_in_force='gtc'           # Set time in force to 'good to close'
+                    )
 
     def on_close(ws):
         print("closed connection")
