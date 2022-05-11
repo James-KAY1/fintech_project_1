@@ -134,14 +134,15 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     ).df
     print(f'bars_from_earlier_date {bars_from_earlier_date}')
 
+    # Set the close price from earlier date
     price_from_earlier_date = bars_from_earlier_date.iloc[0]['close']
     print(f'The price_from_earlier_date is {price_from_earlier_date}')
     
-    # Calculating trading signal
+    # Calculating price to start trading bot
     price_to_start_trading_bot = price_from_earlier_date * (1+buy_signal)
     print(f'price_to_start_trading_bot is {price_to_start_trading_bot}')
     
-    # link for alcapa socket 
+    # Set alpaca socket URL
     socket = "wss://stream.data.alpaca.markets/v2/iex"
 
     # Define function for websocket
