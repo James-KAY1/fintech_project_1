@@ -115,7 +115,7 @@ def input_ticker_info():
 # Function to initialize the trading bot
 def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     # Set date offset to 11 days prior 
-    days_to_subtract = 11
+    days_to_subtract = 7
 
     # Set today as a variable
     today = (datetime.today()).strftime('%Y-%m-%d')
@@ -145,7 +145,7 @@ def run_robo_trader(ticker, buy_signal, sell_signal, trade_allocation):
     # Set alpaca socket URL
     socket = "wss://stream.data.alpaca.markets/v2/iex"
 
-    # Define function for websocket
+    # Define function for websockett
     def on_open(ws):
         print("opened")
         # Authenticate into Alpacas
