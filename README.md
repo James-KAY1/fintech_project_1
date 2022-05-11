@@ -32,7 +32,7 @@ Majority of the above libraries should be part of the base applications that wer
 ## Table of Contents
 Please use the following links to access the different sections of the Repository/Application:
 
-1. **Industry Sector ticker Analysis**:  Analysis and selection of tickers for each Industry Sector (Utilizing Yahoo finance API & other libraries listed per the link).
+1. **Industry Sector ticker Analysis**:  Analysis and selection of tickers for each Industry Sector that will be recommended to user to trade (Utilizing Yahoo finance API & other libraries listed above).
    >[Technology](./Industry_sector_tickers_analysis/tech_stocks_analysis_selection.ipynb)
   
    >[Energy](./Industry_sector_tickers_analysis/energy_stocks_analysis_selection.ipynb)
@@ -43,10 +43,10 @@ Please use the following links to access the different sections of the Repositor
 
    >[Finance](./Industry_sector_tickers_analysis/finance_stocks_analysis_selection.ipynb)
 
-1. **Command Line Interface (user) with Application**: Terminal functionality (Utilizing Fire and Questionary python library & other libraries listed per the link)
+1. **Command Line Interface (user) with Application**: Providing user the recommended ticker within each Industry sector listed above (Utilizing Fire and Questionary & other libraries listed above)
 
 
-3. **Trading Bot**: Trading application that will place trade on behalf of user (Utilizing Alpaca API & other libraries listed per the link).
+3. **Trading Bot**: Trading Bot that will place trades based on user's trading signal inputs utilzing a pull back trading strategy (Utilizing Alpaca API & other libraries listed above).
 
 
 ---
