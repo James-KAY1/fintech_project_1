@@ -54,19 +54,11 @@ Please use the following links to access the different sections of the Repositor
 ## Contributors
 Contributors for the creation and deployment of the Autotrader Application and duties:
 
-<<<<<<< HEAD
 1. Ryan Anderson: a) Repo Owner b) Python Fire Function (Terminal functionality)
 2. Tao Chen: a) Simple trading bot b) Real time data stream & stock technical analysis programming
 3. James Handral: a)Industry sector tickers Data Collection, Clean up & Analysis  b) README file
 4. Colton Mayes: a) Final Presentation b) Visualization for Presentation
 5. Anton Maliksi: a) README file b) Final Presentation
-=======
-1. Ryan Anderson (Questionary Inputs, Modularity)
-2. Tao Chen (Trading Bot, Signals for Trading Bot, Technical Analysis for Signals)
-3. James Handral (Historical Analysis for Health, Finance, Tech, Energy, and Utilities Sectors)
-4. Colton Mayes (Data Visualization, Final Presentation)
-5. Anton Maliksi (README file, Final Presentation)
->>>>>>> dd92381cbeb9531e9c2509b89cb9ed71a0b50304
 
 ---
 
