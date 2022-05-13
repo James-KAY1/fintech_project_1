@@ -25,6 +25,8 @@ Our AutoTrader Applicatoin utilizes  **Python (v 3.9.7)** and the following libr
 ## Installation Guide
 Majority of the above libraries should be part of the base applications that were installed with the Python version above; if not, you will have to install them through the pip package manager of Python.
 
+[PIP Install Support Web Site](https://packaging.python.org/en/latest/tutorials/installing-packages/#ensure-you-can-run-python-from-the-command-line)
+
 ---
 ## Application Sections
 
