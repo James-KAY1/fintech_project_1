@@ -9,6 +9,9 @@ This Application includes the following features:
 2. User friendly and interactive program that allows users to select and create the parameters from which the trading bot will operate.
 3. A fully automated trading program that will take the variables from the user inputs in the previous step and actively execute real trades in the marketplace.
 
+* A subscription to ALPACA API of $7/month is needed to run the AutoTrader.
+* For the AutoTrader can only place trades during market hours (9:30am -4pm).
+
    
 ![timeline](./Images/timeline.jpg)
 ---
@@ -17,7 +20,7 @@ This Application includes the following features:
 
 Our AutoTrader Applicatoin utilizes  **Python (v 3.9.7)** and the following libraries:
 
-`1. fire 2. questionary 3. time 4. Path from pathlib 5. pandas 6. numpy 7. numpy.random 8.alpaca_trade_api 9. load_dotenv 10. requests 11. hvplot.pandas 12. sqlalchemy 13. os 14. ast 15. json 16. requests_html 17. ftplib 18. yahoo_fin 19. IPython.display 20. io 21. atploblib.pyplot 22. mplot3d from mpl_toolkits 23. talib 24. websocket 25. plotly`
+`1. fire 2. questionary 3. time 4. Path from pathlib 5. pandas 6. numpy 7. numpy.random 8.alpaca_trade_api 9. load_dotenv 10. requests 11. hvplot.pandas 12. sqlalchemy 13. os 14. ast 15. json 16. requests_html 17. ftplib 18. yahoo_fin 19. IPython.display 20. io 21. atploblib.pyplot 22. mplot3d from mpl_toolkits 23. talib 24. websocket 25. plotly 26. panel`
 
 ---
 
@@ -47,11 +50,11 @@ Majority of the above libraries should be part of the base applications that wer
    
  
 
-2. **Command line Interface Section**: During the development of the AutoTrader, we recognized that buy and sell signals would significantly improve the overall effectiveness of the AutoTrader. So we allowed the user to have the functionality to input their signals directly to the AutoTrader utilizing pythons Fire and Questionary Libraries. 
+2. **Command line Interface Section**: During the development of the AutoTrader, we recognized that buy and sell signals would significantly improve the overall effectiveness of the AutoTrader. So we allowed the user to have the functionality to input their signals directly to the AutoTrader utilizing python's Fire and Questionary Libraries. 
 
 *Steps on how the User interacts with the AutoTrader:*
 
- >a) The Python file, "input.py," imports the "sectors_and_tickers.csv" from the Resources folder. 
+ >a) The Python file, "input_Real__Time_Buy_Signal.py" imports the "sectors_and_tickers.csv" from the Resources folder. 
 The sectors are reviewed and set as the choices to refine which stocks are available to trade.
 
  >b) Once the sector is selected, a second selection lists the 2 tickers within the selected sector the user can pick to trade.
@@ -80,6 +83,9 @@ The sectors are reviewed and set as the choices to refine which stocks are avail
 ---
 
 ## Development Pipeline
+
+*Technical_Analysis_Future_PiPline.ipynb* - This file is a prototype of a future upgrade to the AutoTrader that will be utilzing Technical Analysis.
+[Technical_Analysis_Upgrade](./Technical_Analysis_Future_Pipline.ipynb)
 
 >![pipline](./Images/pipeline.jpg)
 
