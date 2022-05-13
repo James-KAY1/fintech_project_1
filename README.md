@@ -1,26 +1,23 @@
 # AutoTrader Application
+
 ## Overview & Features
 We are proud to showcase the development of an AutoTrader program that provides users who don't have the time and resource the research, analysis and trading capability through our fully-integrated Stock-Trading application.
 
 
 This Application includes the following features:
-1. Analysis and selection of the top performing tickers within the Technology, Energy, Health, Utility, and Finance sectors.
-1. Terminal interface with the application that users can utilize to select recommended tickers to trade.
-2. The terminal interface will also offer the users the capablilities to select criterias for the buy/sell signals for the trading bot to use for placing trades on their behalf.
+1. Analysis and recommendation of the top performing stocks within the Technology, Energy, Health,       Utility, and Finance Sectors.
+2. User friendly and interactive program that allows users to select and create the parameters from which the trading bot will operate.
+3. A fully automated trading program that will take the variables from the user inputs in the previous step and actively execute real trades in the marketplace.
 
->![trading_bot](./Images/trading_bot.jpg)
-
+   
+![timeline](./Images/timeline.jpg)
 ---
 
 ## Technologies
 
 Our AutoTrader Applicatoin utilizes  **Python (v 3.9.7)** and the following libraries:
 
-`1.	fire    2. questionary   3. time  4. Path from pathlib  5. pandas  6. numpy 7. numpy.random 8. alpaca_trade_api
-9.	REST, TimeFrame from alpaca_trade_api 10. load_dotenv from dotenv 11. requests 12. hvplot.pandas 13. sqlalchemy
-14.	os 15. ast 16. json 17. requests_html 18. ftplib 19. yahoo.fin.stock_info 20. get_data from yahoo_fin.stock_info 
-21.	IPython.display 22. io 23. matploblib.pyplot 24. mplot3d from mpl_toolkits 25. talib 26. websocket 27. plotly.graph_objects
-28.	plotly.express`
+`1. fire 2. questionary 3. time 4. Path from pathlib 5. pandas 6. numpy 7. numpy.random 8.alpaca_trade_api 9. load_dotenv 10. requests 11. hvplot.pandas 12. sqlalchemy 13. os 14. ast 15. json 16. requests_html 17. ftplib 18. yahoo_fin 19. IPython.display 20. io 21. atploblib.pyplot 22. mplot3d from mpl_toolkits 23. talib 24. websocket 25. plotly`
 
 ---
 
@@ -29,10 +26,12 @@ Our AutoTrader Applicatoin utilizes  **Python (v 3.9.7)** and the following libr
 Majority of the above libraries should be part of the base applications that were installed with the Python version above; if not, you will have to install them through the pip package manager of Python.
 
 ---
-## Table of Contents
-Please use the following links to access the different sections of the Repository/Application:
+## Application Sections
 
-1. **Industry Sector ticker Analysis**:  Analysis and selection of tickers for each Industry Sector (Utilizing Yahoo finance API & other libraries listed per the link).
+
+1. **Industry Sector ticker Analysis**:   The first step in the application was the research, analysis, and recommendation of prospective stock opportunities. The criteria for the initial sample of stocks were the top performing tickers in the Industry Sectors below that had returns that were greater or equal to 2% for the last 12 trading months. We utilized the Yahoo Finance API to draw historical data for our ticker selections based on the above criteria. We cleaned and fed this information into a dataframe focusing on the daily closing prices of each stock, and then applied various filters such as the entire history of each company’s returns compared with only the period of time in which all stocks existed and traded simultaneously on the market. One of the best features of this prototype is the ease with which we can interchange the stock tickers in question for analysis. Further refinement is of course planned, but even in our current iteration we can analyze any cross-section of companies a customer wishes to look at with extreme ease. Also generated are key fundamental and technical stats/reports for the 2 recommended tickers within each Sector that the user can review.
+ 
+ Below are the links to each Industry Sector stock analysis for your reference:
    >[Technology](./Industry_sector_tickers_analysis/tech_stocks_analysis_selection.ipynb)
   
    >[Energy](./Industry_sector_tickers_analysis/energy_stocks_analysis_selection.ipynb)
@@ -43,10 +42,45 @@ Please use the following links to access the different sections of the Repositor
 
    >[Finance](./Industry_sector_tickers_analysis/finance_stocks_analysis_selection.ipynb)
 
-1. **Terminal Interface (user) with Application**: Terminal functionality (Utilizing Fire and Questionary python library & other libraries listed per the link)
+   
+ 
+
+2. **Command line Interface Section**: During the development of the AutoTrader, we recognized that buy and sell signals would significantly improve the overall effectiveness of the AutoTrader. So we allowed the user to have the functionality to input their signals directly to the AutoTrader utilizing pythons Fire and Questionary Libraries. 
+
+*Steps on how the User interacts with the AutoTrader:*
+
+ >a) The Python file, "input.py," imports the "sectors_and_tickers.csv" from the Resources folder. 
+The sectors are reviewed and set as the choices to refine which stocks are available to trade.
+
+ >b) Once the sector is selected, a second selection lists the 2 tickers within the selected sector the user can pick to trade.
+
+ >c)Upon selecting the ticker, the user will set the total amount they would like to trade for that stock as a percentage of their total liquid capital. The program will then input the buy and sell signals as percentages, launch the bot, and begin trading.
 
 
-3. **Trading Bot**: Trading application that will place trade on behalf of user (Utilizing Alpaca API & other libraries listed per the link).
+
+
+3. **AutoTrader Trading Algorithm**: For the development of this trading algorithm we wanted the user to have the ultimate control over the signal inputs that would initiate any trades. Please note, the Alpaca API was utilzied for the data collection used for the algorithm analysis and placing trades in our paper account.
+
+*Steps on how the users inputs are used to place trades*:
+
+>a) From the inputs from section 2 above; The Users ticker selection, trading parameters and signals will be sent to the AutoTrader Trading Algorithm to iterate through all the incoming trading data.
+
+>b) The bot will send the User messages and alerts once a signal condition has been met.
+
+>c) Once the message has been sent the bot will place a trade based on the signal using a trailing stop order. 
+
+
+
+[AutoTrader_Application](input_Real_Time_Buy_Signal.py)
+
+>![autotrader_code](./Images/autotrader_code.jpg)
+
+---
+
+## Development Pipeline
+
+>![pipline](./Images/pipeline.jpg)
+
 
 
 ---
