@@ -10,7 +10,7 @@ This Application includes the following features:
 3. A fully automated trading program that will take the variables from the user inputs in the previous step and actively execute real trades in the marketplace.
 
 * A subscription to ALPACA API of $7/month is needed to run the AutoTrader.
-* For the AutoTrader can only place trades during market hours (9:30am -4pm).
+* The AutoTrader can only place trades during market hours (9:30am - 4pm).
 
    
 ![timeline](./Images/timeline.jpg)
@@ -85,7 +85,7 @@ The sectors are reviewed and set as the choices to refine which stocks are avail
 ## Development Pipeline
 
 *Technical_Analysis_Future_PiPline.ipynb* - This file is a prototype of a future upgrade to the AutoTrader that will be utilzing Technical Analysis.
-[Technical_Analysis_Upgrade](./Technical_Analysis_Future_Pipline.ipynb)
+[Technical_Analysis_Upgrade](./Technical_Analysis_Future_Pipeline.ipynb)
 
 >![pipline](./Images/pipeline.jpg)
 
