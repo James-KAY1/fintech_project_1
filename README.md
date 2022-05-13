@@ -8,7 +8,7 @@ This Application includes the following features:
 1. Terminal interface with the application that users can utilize to select recommended tickers to trade.
 2. The terminal interface will also offer the users the capablilities to select criterias for the buy/sell signals for the trading bot to use for placing trades on their behalf.
 
->![trading_bot](./Images/trading_bot.jpg width=400)
+>![trading_bot](./Images/trading_bot.jpg)
 
 ---
 
