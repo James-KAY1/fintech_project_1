@@ -1,7 +1,7 @@
 # AutoTrader Application
 
 ## Overview & Features
-We are proud to showcase the development of an AutoTrader program that provides users who don't have the time and resource the research, analysis and trading capability through our fully-integrated Stock-Trading application.
+We are proud to showcase the development of an AutoTrader application that provides users who don't have the time and resource the research, analysis and trading capability through our fully-integrated Stock-Trading application.
 
 
 This Application includes the following features:
